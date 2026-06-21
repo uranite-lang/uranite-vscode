@@ -3,7 +3,7 @@
 @author hxAri (hxari)
 @create 2025-02-24 15:15
 @update 2026-06-18 00:04
-@github https://github.com/uranite-lang/uranite
+@github https://github.com/uranite-lang/uranite-vscode
 
 Uranite - Uranite Copyright (c) 2025 - hxAri <hxari@proton.me>
 Uranite Licence under GNU General Public Licence v3
@@ -44,7 +44,8 @@ To use this extension locally:
 
 Example command for Linux:
 ```bash
-ln -s $(pwd)/extensions/uranite-vsc ~/.vscode/extensions/uranite-vsc
+cd ~/.vscode/extensions/uranite-vsc
+git clone https://github.com/uranite-lang/uranite-vscode
 ```
 
 ## Language Reference
