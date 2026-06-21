@@ -25,6 +25,10 @@
         "lint": "eslint src --ext ts",
         "test": "node ./compiled/test/runTest.js"
     },
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/uranite-lang/uranite-vscode"
+    },
     "devDependencies": {
         "@types/node": "^16.11.7",
         "@types/vscode": "^1.80.0",
