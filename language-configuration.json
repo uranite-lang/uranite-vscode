@@ -1,0 +1,112 @@
+{
+    "comments": {
+        "lineComment": "#",
+        "blockComment": [
+            "#{",
+            "}#"
+        ]
+    },
+    "brackets": [
+        [
+            "[",
+            "]"
+        ],
+        [
+            "(",
+            ")"
+        ],
+        [
+            "{",
+            "}"
+        ],
+        [
+            "<",
+            ">"
+        ]
+    ],
+    "colorizedBracketPairs": [
+        [
+            "[",
+            "]"
+        ],
+        [
+            "(",
+            ")"
+        ],
+        [
+            "<",
+            ">"
+        ]
+    ],
+    "autoClosingPairs": [
+        {
+            "open": "[",
+            "close": "]"
+        },
+        {
+            "open": "(",
+            "close": ")"
+        },
+        {
+            "open": "<",
+            "close": ">",
+            "notIn": ["string", "comment"]
+        },
+        {
+            "open": "\"",
+            "close": "\"",
+            "notIn": ["string"]
+        },
+        {
+            "open": "'",
+            "close": "'",
+            "notIn": ["string"]
+        },
+        {
+            "open": "#{",
+            "close": "}#"
+        }
+    ],
+    "autoCloseBefore": ";:.,=}])>` \n\t",
+    "surroundingPairs": [
+        [
+            "[",
+            "]"
+        ],
+        [
+            "(",
+            ")"
+        ],
+        [
+            "<",
+            ">"
+        ],
+        [
+            "\"",
+            "\""
+        ],
+        [
+            "'",
+            "'"
+        ]
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "^\\s*.*:\\s*(#.*)?$",
+        "decreaseIndentPattern": "^\\s*(return|break|continue|raise|pass)\\b"
+    },
+    "folding": {
+        "markers": {
+            "start": "^\\s*.*:\\s*(#.*)?$",
+            "end": "^(?=\\S)"
+        }
+    },
+    "onEnterRules": [
+        {
+            "beforeText": "^\\s*.*:\\s*(#.*)?$",
+            "action": {
+                "indent": "indent"
+            }
+        }
+    ],
+    "wordPattern": "[a-zA-Z_][a-zA-Z0-9_]*(?:::[a-zA-Z_][a-zA-Z0-9_]*)*"
+}

@@ -1,0 +1,187 @@
+{
+    "name": "uranite-vscode",
+    "displayName": "Uranite Language Support",
+    "description": "Syntax highlighting and language support for the Uranite programming language.",
+    "version": "0.3.0",
+    "publisher": "uranite-lang",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "main": "./compiled/extension.js",
+    "activationEvents": [
+        "onLanguage:uranite",
+        "onCommand:uranite.restartServer",
+        "onCommand:uranite.selectLspPath",
+        "onCommand:uranite.buildFile"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./compiled/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/node": "^16.11.7",
+        "@types/vscode": "^1.80.0",
+        "@typescript-eslint/eslint-plugin": "^5.42.0",
+        "@typescript-eslint/parser": "^5.42.0",
+        "eslint": "^8.26.0",
+        "typescript": "^4.8.4"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^8.0.2"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "uranite",
+                "aliases": [
+                    "Uranite",
+                    "uranite"
+                ],
+                "extensions": [
+                    ".urn"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "uranite",
+                "scopeName": "source.urn",
+                "path": "./syntaxes/uranite.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "uranite",
+                "path": "./snippets/uranite.json"
+            }
+        ],
+        "semanticTokenScopes": [
+            {
+                "language": "uranite",
+                "scopes": {
+                    "namespace": ["entity.name.namespace.uranite"],
+                    "type": ["entity.name.type.uranite"],
+                    "class": ["entity.name.type.class.uranite"],
+                    "enum": ["entity.name.type.enum.uranite"],
+                    "interface": ["entity.name.type.interface.uranite"],
+                    "struct": ["entity.name.type.struct.uranite"],
+                    "typeParameter": ["entity.name.type.parameter.uranite"],
+                    "parameter": ["variable.parameter.uranite"],
+                    "variable": ["variable.other.uranite"],
+                    "variable.readonly": ["variable.other.constant.uranite"],
+                    "property": ["variable.other.property.uranite"],
+                    "enumMember": ["variable.other.enummember.uranite"],
+                    "function": ["entity.name.function.uranite"],
+                    "function.declaration": ["entity.name.function.declaration.uranite"],
+                    "method": ["entity.name.function.member.uranite"],
+                    "keyword": ["keyword.other.uranite"],
+                    "string": ["string.quoted.uranite"],
+                    "number": ["constant.numeric.uranite"],
+                    "operator": ["keyword.operator.uranite"]
+                }
+            }
+        ],
+        "commands": [
+            {
+                "command": "uranite.restartServer",
+                "title": "Uranite: Restart Language Server"
+            },
+            {
+                "command": "uranite.selectLspPath",
+                "title": "Uranite: Select LSP Binary"
+            },
+            {
+                "command": "uranite.buildFile",
+                "title": "Uranite: Build Current File"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Uranite Configuration",
+            "properties": {
+                "uranite.lspPath": {
+                    "type": "string",
+                    "default": "",
+                    "scope": "machine-overridable",
+                    "description": "Absolute path to the uranite-lsp binary. If empty, auto-discovers from workspace build/, system PATH, or common install locations.",
+                    "markdownDescription": "Absolute path to the `uranite-lsp` binary. If empty, auto-discovers from:\n1. `build/uranite-lsp` in workspace\n2. `/usr/local/bin/uranite-lsp`\n3. `/usr/bin/uranite-lsp`\n4. `~/.local/bin/uranite-lsp`\n\nUse **Uranite: Select LSP Binary** command to browse."
+                },
+                "uranite.semanticHighlighting.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable semantic token highlighting from the language server."
+                },
+                "uranite.diagnostics.maxErrors": {
+                    "type": "number",
+                    "default": 100,
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "description": "Maximum number of diagnostic errors to report per file."
+                },
+                "uranite.modulesPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Override path to the Uranite standard library modules directory."
+                },
+                "uranite.trace.server": {
+                    "type": "string",
+                    "enum": ["off", "messages", "verbose"],
+                    "default": "off",
+                    "description": "Trace communication between VS Code and the Uranite language server."
+                },
+                "uranite.buildCommand": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Custom build command. If empty, uses './build/uranite' in the workspace."
+                }
+            }
+        },
+        "taskDefinitions": [
+            {
+                "type": "uranite",
+                "required": ["source"],
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "description": "Path to the .urn source file to compile."
+                    },
+                    "output": {
+                        "type": "string",
+                        "description": "Output binary name."
+                    },
+                    "emitLlvm": {
+                        "type": "boolean",
+                        "description": "Emit LLVM IR instead of a binary."
+                    },
+                    "verbose": {
+                        "type": "boolean",
+                        "description": "Enable verbose compiler output."
+                    }
+                }
+            }
+        ],
+        "problemMatchers": [
+            {
+                "name": "uranite",
+                "owner": "uranite",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning|note):\\s+(.+)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        ]
+    }
+}

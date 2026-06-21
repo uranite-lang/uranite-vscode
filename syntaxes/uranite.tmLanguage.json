@@ -1,0 +1,280 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Uranite",
+    "scopeName": "source.urn",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#operators"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#types"
+        },
+        {
+            "include": "#literals"
+        },
+        {
+            "include": "#functions"
+        },
+        {
+            "include": "#decorators"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.block.urn",
+                    "begin": "#\\{",
+                    "end": "\\}#",
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        }
+                    ]
+                },
+                {
+                    "name": "comment.line.number-sign.urn",
+                    "match": "(#)\\s*(@[a-zA-Z]+)?(.*)$",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.urn"
+                        },
+                        "2": {
+                            "name": "storage.type.annotation.urn"
+                        },
+                        "3": {
+                            "name": "comment.line.number-sign.urn"
+                        }
+                    }
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.triple.urn",
+                    "begin": "\"\"\"",
+                    "end": "\"\"\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.urn",
+                            "match": "\\\\."
+                        },
+                        {
+                            "name": "keyword.other.docsection.urn",
+                            "match": "^\\s*(Parameters|Returns|Raises|Generics|Complexity|Requires|Stability|Examples|See Also):"
+                        },
+                        {
+                            "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(\\()([^\\)]+)(\\))\\s*(:)",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.parameter.urn"
+                                },
+                                "2": {
+                                    "name": "punctuation.definition.parameters.begin.urn"
+                                },
+                                "3": {
+                                    "name": "support.type.urn"
+                                },
+                                "4": {
+                                    "name": "punctuation.definition.parameters.end.urn"
+                                },
+                                "5": {
+                                    "name": "punctuation.separator.colon.urn"
+                                }
+                            }
+                        },
+                        {
+                            "match": "^\\s*([A-Z][a-zA-Z0-9_]*|String|I64|Double|Boolean|Void)\\s*(:)",
+                            "captures": {
+                                "1": {
+                                    "name": "support.type.urn"
+                                },
+                                "2": {
+                                    "name": "punctuation.separator.colon.urn"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.double.urn",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.urn",
+                            "match": "\\\\(n|t|r|\\\\|0|'|\"|x[0-9a-fA-F]{2})"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.urn",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.urn",
+                            "match": "\\\\(n|t|r|\\\\|0|')"
+                        }
+                    ]
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.urn",
+                    "match": "(=>|->|==|!=|<=|>=|<<=|>>=|\\+=|\\-=|\\*\\*=|\\*=|/=|%=|&=|\\|=|\\^=|\\*\\*|\\.\\.\\.|\\.\\.|::|<<|>>|<|>|\\+|-|\\*|/|%|&|\\||\\^|~|=)"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.flow.urn",
+                    "match": "\\b(if|elif|else|match|switch|case|for|while|break|continue|return|yield|pass)\\b"
+                },
+                {
+                    "name": "keyword.control.exception.urn",
+                    "match": "\\b(try|except|raise|raises|finally)\\b"
+                },
+                {
+                    "name": "keyword.control.async.urn",
+                    "match": "\\b(async|await|defer)\\b"
+                },
+                {
+                    "name": "keyword.declaration.function.urn",
+                    "match": "\\b(function|property|lambda)\\b"
+                },
+                {
+                    "name": "keyword.declaration.type.urn",
+                    "match": "\\b(class|struct|enum|interface|trait|type|unit|backed)\\b"
+                },
+                {
+                    "name": "keyword.declaration.other.urn",
+                    "match": "\\b(package|import|from|extern|extends|implements|use|export)\\b"
+                },
+                {
+                    "name": "keyword.operator.new.urn",
+                    "match": "\\b(new|delete)\\b"
+                },
+                {
+                    "name": "keyword.operator.type-check.urn",
+                    "match": "\\b(instanceof|subclassof)\\b"
+                },
+                {
+                    "name": "storage.modifier.access.urn",
+                    "match": "\\b(public|private|protect)\\b"
+                },
+                {
+                    "name": "storage.modifier.urn",
+                    "match": "\\b(virtual|override|abstract|final|Readonly|static|const|mut|ref|own|move|addressof|unsafe|native)\\b"
+                },
+                {
+                    "name": "keyword.operator.logical.urn",
+                    "match": "\\b(and|or|not|is|in|as|where)\\b"
+                },
+                {
+                    "name": "keyword.other.asm.urn",
+                    "match": "\\b(asm|volatile|output|input|clobber)\\b"
+                },
+                {
+                    "name": "variable.language.urn",
+                    "match": "\\b(self|parent)\\b"
+                }
+            ]
+        },
+        "types": {
+            "patterns": [
+                {
+                    "name": "support.type.primitive.urn",
+                    "match": "\\b(I8|I16|I32|I64|U8|U16|U32|U64|F32|F64|Bool|Boolean|Byte|Bytes|Char|Double|Float|Int|Integer|Long|UInt|NoneType|Object|String|Void|Callable|Meta)\\b"
+                },
+                {
+                    "match": "(\\?)\\s*(\\b[A-Za-z_][A-Za-z0-9_]*\\b)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.operator.nullable.urn"
+                        },
+                        "2": {
+                            "name": "support.type.urn"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b([A-Z][a-zA-Z0-9_]*)\\s*(?=<)",
+                    "name": "support.type.generic.urn"
+                }
+            ]
+        },
+        "literals": {
+            "patterns": [
+                {
+                    "name": "constant.language.boolean.urn",
+                    "match": "\\b(True|False)\\b"
+                },
+                {
+                    "name": "constant.language.none.urn",
+                    "match": "\\b(None)\\b"
+                },
+                {
+                    "name": "constant.numeric.hex.urn",
+                    "match": "\\b0[xX][0-9a-fA-F_]+\\b"
+                },
+                {
+                    "name": "constant.numeric.bin.urn",
+                    "match": "\\b0[bB][01_]+\\b"
+                },
+                {
+                    "name": "constant.numeric.oct.urn",
+                    "match": "\\b0[oO][0-7_]+\\b"
+                },
+                {
+                    "name": "constant.numeric.float.urn",
+                    "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9]+)?\\b"
+                },
+                {
+                    "name": "constant.numeric.integer.urn",
+                    "match": "\\b[0-9][0-9_]*\\b"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "match": "\\b(function|property)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.function.urn"
+                        },
+                        "2": {
+                            "name": "entity.name.function.urn"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+                    "name": "entity.name.function.call.urn"
+                }
+            ]
+        },
+        "decorators": {
+            "patterns": [
+                {
+                    "name": "meta.decorator.urn",
+                    "match": "@[a-zA-Z_][a-zA-Z0-9_]*"
+                }
+            ]
+        }
+    }
+}

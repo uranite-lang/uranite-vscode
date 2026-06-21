@@ -1,0 +1,231 @@
+{
+    "Function Declaration": {
+        "prefix": "func",
+        "body": [
+            "${1|public,private,protect|} function ${2:name}(${3:self}) -> ${4:Void}:",
+            "    ${0}"
+        ],
+        "description": "Declare a function"
+    },
+    "Main Function": {
+        "prefix": "main",
+        "body": [
+            "public function main() -> I32:",
+            "    ${0}",
+            "    return 0"
+        ],
+        "description": "Main entry point"
+    },
+    "Class Declaration": {
+        "prefix": "class",
+        "body": [
+            "${1|public,private,protect|} class ${2:Name}:",
+            "    ${3|public,private,protect|} ${4:I64} ${5:field}",
+            "",
+            "    public function ${2}(self, ${4} ${5}) -> Void:",
+            "        self.${5} = ${5}",
+            "    ${0}"
+        ],
+        "description": "Declare a class"
+    },
+    "Struct Declaration": {
+        "prefix": "struct",
+        "body": [
+            "${1|public,private,protect|} struct ${2:Name}:",
+            "    ${3|public,private,protect|} ${4:I64} ${5:field}",
+            "    ${0}"
+        ],
+        "description": "Declare a struct"
+    },
+    "Enum Declaration": {
+        "prefix": "enum",
+        "body": [
+            "${1|public,private,protect|} enum ${2:Name}:",
+            "    unit ${3:VARIANT}",
+            "    ${0}"
+        ],
+        "description": "Declare an enum"
+    },
+    "Backed Enum": {
+        "prefix": "enumbacked",
+        "body": [
+            "${1|public,private,protect|} enum ${2:Name} backed ${3:I64}:",
+            "    unit ${4:VARIANT} ${5:0}",
+            "    ${0}"
+        ],
+        "description": "Declare a backed enum"
+    },
+    "Interface Declaration": {
+        "prefix": "interface",
+        "body": [
+            "${1|public,private,protect|} interface ${2:Name}:",
+            "    public function ${3:method}(self) -> ${4:Void}",
+            "    ${0}"
+        ],
+        "description": "Declare an interface"
+    },
+    "If Statement": {
+        "prefix": "if",
+        "body": [
+            "if ${1:condition}:",
+            "    ${0}"
+        ],
+        "description": "If statement"
+    },
+    "If-Else Statement": {
+        "prefix": "ifelse",
+        "body": [
+            "if ${1:condition}:",
+            "    ${2}",
+            "else:",
+            "    ${0}"
+        ],
+        "description": "If-else statement"
+    },
+    "For Loop": {
+        "prefix": "for",
+        "body": [
+            "for ${1:item} in ${2:iterable}:",
+            "    ${0}"
+        ],
+        "description": "For-in loop"
+    },
+    "While Loop": {
+        "prefix": "while",
+        "body": [
+            "while ${1:condition}:",
+            "    ${0}"
+        ],
+        "description": "While loop"
+    },
+    "Match Expression": {
+        "prefix": "matchexpr",
+        "body": [
+            "match ${1:expr} in ${2:pattern} => ${3:value}, * => ${0:default}"
+        ],
+        "description": "Match expression"
+    },
+    "Switch Statement": {
+        "prefix": "switch",
+        "body": [
+            "switch ${1:expr}:",
+            "    case ${2:pattern}:",
+            "        ${3}",
+            "        break",
+            "    case *:",
+            "        ${0}",
+            "        break"
+        ],
+        "description": "Switch statement"
+    },
+    "Try-Except": {
+        "prefix": "try",
+        "body": [
+            "try:",
+            "    ${1}",
+            "except ${2:Error} as ${3:e}:",
+            "    ${0}"
+        ],
+        "description": "Try-except block"
+    },
+    "Lambda": {
+        "prefix": "lambda",
+        "body": [
+            "lambda ${1:Type} ${2:x}: ${0}"
+        ],
+        "description": "Lambda expression"
+    },
+    "Package": {
+        "prefix": "package",
+        "body": [
+            "package ${1:main}"
+        ],
+        "description": "Package declaration"
+    },
+    "Import": {
+        "prefix": "import",
+        "body": [
+            "import ${1:module}"
+        ],
+        "description": "Import module"
+    },
+    "From Import": {
+        "prefix": "fromimport",
+        "body": [
+            "from ${1:module} import ${2:name}"
+        ],
+        "description": "Selective import"
+    },
+    "Extern Function": {
+        "prefix": "extern",
+        "body": [
+            "extern function ${1:name}(${2:String s}) -> ${3:I32}"
+        ],
+        "description": "Extern function declaration"
+    },
+    "Property": {
+        "prefix": "property",
+        "body": [
+            "${1|public,private,protect|} property ${2:name}(self) -> ${3:I64}:",
+            "    return ${0}"
+        ],
+        "description": "Computed property"
+    },
+    "Export Block": {
+        "prefix": "export",
+        "body": [
+            "export {",
+            "    ${0}",
+            "}"
+        ],
+        "description": "Export block"
+    },
+    "Trait Declaration": {
+        "prefix": "trait",
+        "body": [
+            "${1|public,private,protect|} trait ${2:Name}:",
+            "    public function ${3:method}(self) -> ${4:Void}:",
+            "        ${0}"
+        ],
+        "description": "Declare a trait"
+    },
+    "C-Style For Loop": {
+        "prefix": "forc",
+        "body": [
+            "for I64 ${1:index} = 0; ${1} < ${2:count}; ${1} = ${1} + 1:",
+            "    ${0}"
+        ],
+        "description": "C-style for loop"
+    },
+    "Defer Statement": {
+        "prefix": "defer",
+        "body": [
+            "defer:",
+            "    ${0}"
+        ],
+        "description": "Defer statement"
+    },
+    "Async Function": {
+        "prefix": "asyncfunc",
+        "body": [
+            "${1|public,private,protect|} async function ${2:name}(${3:self}) -> Future<${4:I64}>:",
+            "    ${0}"
+        ],
+        "description": "Async function with Future return type"
+    },
+    "Unsafe Block": {
+        "prefix": "unsafe",
+        "body": [
+            "unsafe:",
+            "    ${0}"
+        ],
+        "description": "Unsafe block"
+    },
+    "Inline Assembly": {
+        "prefix": "asm",
+        "body": [
+            "asm volatile \"${1:instruction}\" : output(\"${2:=r}\" ${3:result}) : input(\"${4:r}\" ${5:value}) : clobber(\"${6:memory}\")"
+        ],
+        "description": "Inline assembly statement"
+    }
+}
