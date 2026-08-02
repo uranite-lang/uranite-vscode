@@ -31,20 +31,6 @@ function resolveServerBinaryPath(extensionContext: ExtensionContext): string | u
 		return configuredPath;
 	}
 
-	const workspaceFolders = workspace.workspaceFolders;
-	if (workspaceFolders) {
-		for (const workspaceFolder of workspaceFolders) {
-			const buildPath = path.join(
-				workspaceFolder.uri.fsPath,
-				"build",
-				"uranite-lsp"
-			);
-			if (fs.existsSync(buildPath)) {
-				return buildPath;
-			}
-		}
-	}
-
 	const globalPaths = [
 		"/usr/local/bin/uranite-lsp",
 		"/usr/bin/uranite-lsp",
