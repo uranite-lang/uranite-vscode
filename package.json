@@ -116,7 +116,7 @@
                     "default": "",
                     "scope": "machine-overridable",
                     "description": "Absolute path to the uranite-lsp binary. If empty, auto-discovers from workspace build/, system PATH, or common install locations.",
-                    "markdownDescription": "Absolute path to the `uranite-lsp` binary. If empty, auto-discovers from:\n1. `build/uranite-lsp` in workspace\n2. `/usr/local/bin/uranite-lsp`\n3. `/usr/bin/uranite-lsp`\n4. `~/.local/bin/uranite-lsp`\n\nUse **Uranite: Select LSP Binary** command to browse."
+                    "markdownDescription": "Absolute path to the `uranite-lsp` binary. If empty, auto-discovers from:\n1. `/usr/local/bin/uranite-lsp`\n2. `/usr/bin/uranite-lsp`\n3. `~/.local/bin/uranite-lsp`\n\nUse **Uranite: Select LSP Binary** command to browse."
                 },
                 "uranite.semanticHighlighting.enabled": {
                     "type": "boolean",
